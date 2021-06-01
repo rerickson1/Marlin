@@ -141,7 +141,7 @@
 
 // Choose the name from boards.h that matches your setup
 #ifndef MOTHERBOARD
-  #define MOTHERBOARD BOARD_ANET_10
+  #define MOTHERBOARD BOARD_MKS_SGEN_L_V2
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
