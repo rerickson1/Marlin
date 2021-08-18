@@ -896,7 +896,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 800, 440.3 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 800, 420 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -1152,7 +1152,7 @@
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 5
+#define PROBING_MARGIN 7
 
 // X and Y axis travel speed (mm/min) between probes
 #define XY_PROBE_FEEDRATE (133*60)
@@ -1338,14 +1338,14 @@
 // @section machine
 
 // The size of the printable area
-#define X_BED_SIZE 300
+#define X_BED_SIZE 298
 #define Y_BED_SIZE 280
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS -28
-#define Y_MIN_POS -22
+#define X_MIN_POS -27
+#define Y_MIN_POS -21
 #define Z_MIN_POS 0
-#define X_MAX_POS 300
+#define X_MAX_POS 298
 #define Y_MAX_POS 280
 #define Z_MAX_POS 325
 
@@ -1598,7 +1598,7 @@
 
   #define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
-  #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
+  #define MESH_INSET 8              // Set Mesh bounds as an inset region of the bed
   #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
