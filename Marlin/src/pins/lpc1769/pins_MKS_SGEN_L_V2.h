@@ -382,6 +382,29 @@
 
   #endif // !CR10_STOCKDISPLAY
 
+  #if ENABLED(ANET_FULL_GRAPHICS_LCD) // added defines for ANET LCD pins
+    #undef BTN_EN1
+    #undef BTN_EN2
+    #undef BTN_ENC
+    #undef BEEPER_PIN
+    #undef LCD_PINS_D4
+    #undef LCD_PINS_ENABLE
+    #undef LCD_PINS_RS
+    #undef ST7920_DELAY_1
+    #undef ST7920_DELAY_2
+    #undef ST7920_DELAY_3
+    #define BTN_EN1 P0_15
+    #define BTN_EN2 P1_00
+    #define BTN_ENC P0_18
+    #define BEEPER_PIN P1_31
+    #define LCD_PINS_D4 P1_30
+    #define LCD_PINS_ENABLE P0_17
+    #define LCD_PINS_RS P1_22
+    #define ST7920_DELAY_1 DELAY_NS(0)
+    #define ST7920_DELAY_2 DELAY_NS(63)
+    #define ST7920_DELAY_3 DELAY_NS(125)
+  #endif // ANET_FULL_GRAPHICS_LCD
+
 #endif // HAS_WIRED_LCD
 
 #ifndef SDCARD_CONNECTION
@@ -409,4 +432,4 @@
 //
 //#define PIN_P0_02                        P0_02  // AUX1 (Interrupt Capable/ADC/Serial Port 0)
 //#define PIN_P0_03                        P0_03  // AUX1 (Interrupt Capable/ADC/Serial Port 0)
-//#define PS_ON_PIN                        P1_23  // SERVO P1.23
+#define PS_ON_PIN                        P2_00  // SERVO P2.0
