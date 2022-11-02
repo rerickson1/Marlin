@@ -651,8 +651,8 @@
   //#define PID_PARAMS_PER_HOTEND // Use separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with G-code: M301 E[extruder number, 0-2]
 
-  // ANET A8 Standard Extruder at 210 Degree Celsius and 100% Fan
-  // (measured after M106 S255 with M303 E0 S210 C8)
+  // E3D V6 Extruder at 240 Degree Celsius and 100% Fan and E3D V6 pro silicone sock
+  // (measured after M106 S255 with M303 E0 S240 C8)
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify up to one value per hotend here, according to your setup.
     // If there are fewer values, the last one applies to the remaining hotends.
@@ -660,9 +660,9 @@
     #define DEFAULT_Ki_LIST {   6.33,   6.33 }
     #define DEFAULT_Kd_LIST {  95.60,  95.60 }
   #else
-    #define DEFAULT_Kp 10.33
-    #define DEFAULT_Ki 0.53
-    #define DEFAULT_Kd 50.31
+    #define DEFAULT_Kp 8.84
+    #define DEFAULT_Ki 0.42
+    #define DEFAULT_Kd 46.51
   #endif
 #endif
 
