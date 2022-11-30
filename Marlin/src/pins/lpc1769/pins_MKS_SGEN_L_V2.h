@@ -319,6 +319,38 @@
     #define LCD_PINS_ENABLE          EXP1_08_PIN
     #define LCD_PINS_D4              EXP1_06_PIN
 
+  #elif ENABLED(ANET_FULL_GRAPHICS_LCD)
+    #ifndef NO_CONTROLLER_CUSTOM_WIRING_WARNING
+      #error "CAUTION! ANET_FULL_GRAPHICS_LCD requires wiring modifications. See 'pins_MKS_SGEN_L_V2.h' for details. (Define NO_CONTROLLER_CUSTOM_WIRING_WARNING to suppress this error.)"
+    #endif
+
+    /**
+     * 1. Cut the tab off the LCD connector so it can be plugged into the "EXP1" connector the other way.
+     * 2. Swap the LCD's +5V (Pin2) and GND (Pin1) wires. (This is the critical part!)
+     *
+     * !!! If you are unsure, ask for help! Your motherboard may be damaged in some circumstances !!!
+     *
+     * The ANET_FULL_GRAPHICS_LCD connector plug:
+     *
+     *                BEFORE                     AFTER
+     *                ------                     ------
+     *      (BEEPER) | 1  2 | (CLK)    (BEEPER) |10  9 | (CLK)
+     *     (BTN_ENC) | 3  4 | --      (BTN_ENC) | 8  7 | --
+     *     (BTN_EN1)   5  6 | (SID)   (BTN_EN1)   6  5 | (SID)
+     *     (BTN_EN2) | 7  8 | (CS)    (BTN_EN2) | 4  3 | (CS)
+     *            5V | 9 10 | GND           GND | 2  1 | 5V
+     *                ------                     ------
+     *                 LCD                        LCD
+     */
+
+    #define BTN_EN1                 EXP1_05_PIN
+    #define BTN_EN2                 EXP1_07_PIN
+    #undef BTN_ENC
+    #define BTN_ENC                 EXP1_03_PIN
+    #define LCD_PINS_D4             EXP1_02_PIN // CLK
+    #define LCD_PINS_ENABLE         EXP1_06_PIN // SID
+    #define LCD_PINS_RS             EXP1_08_PIN // CS
+
   #else
 
     #define BTN_EN1                  EXP2_03_PIN
@@ -423,29 +455,6 @@
     #endif // !MKS_12864OLED_SSD1306
 
   #endif // !CR10_STOCKDISPLAY
-
-  #if ENABLED(ANET_FULL_GRAPHICS_LCD) // added defines for ANET LCD pins
-    #undef BTN_EN1
-    #undef BTN_EN2
-    #undef BTN_ENC
-    #undef BEEPER_PIN
-    #undef LCD_PINS_D4
-    #undef LCD_PINS_ENABLE
-    #undef LCD_PINS_RS
-    #undef ST7920_DELAY_1
-    #undef ST7920_DELAY_2
-    #undef ST7920_DELAY_3
-    #define BTN_EN1 P0_15
-    #define BTN_EN2 P1_00
-    #define BTN_ENC P0_18
-    #define BEEPER_PIN P1_31
-    #define LCD_PINS_D4 P1_30
-    #define LCD_PINS_ENABLE P0_17
-    #define LCD_PINS_RS P1_22
-    #define ST7920_DELAY_1 DELAY_NS(0)
-    #define ST7920_DELAY_2 DELAY_NS(63)
-    #define ST7920_DELAY_3 DELAY_NS(125)
-  #endif // ANET_FULL_GRAPHICS_LCD
 
 #endif // HAS_WIRED_LCD
 
