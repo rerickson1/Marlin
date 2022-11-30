@@ -628,7 +628,7 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#define E0_AUTO_FAN_PIN P1_04 // FAN2
+#define E0_AUTO_FAN_PIN P2_04 // FAN2
 #define E1_AUTO_FAN_PIN -1
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
@@ -1516,7 +1516,7 @@
     #define PLR_ENABLED_DEFAULT   true // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
     #define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
     #define POWER_LOSS_ZRAISE       10 // (mm) Z axis raise on resume (on power loss with UPS)
-    #define POWER_LOSS_PIN       P1_26 // Pin to detect power loss. Set to -1 to disable default pin on boards without module.
+    #define POWER_LOSS_PIN       P1_25 // Pin to detect power loss. Set to -1 to disable default pin on boards without module.
     #define POWER_LOSS_STATE     HIGH // State of pin indicating power loss
     #define POWER_LOSS_PULLUP         // Set pullup / pulldown as appropriate for your sensor
     //#define POWER_LOSS_PULLDOWN
