@@ -81,6 +81,8 @@ private:
     static void check_filament();
     static bool can_load();
     static bool load_to_gears();
+  #elif ENABLED(MMU_EXTRUDER_SENSOR)
+    static bool load_to_gears();
   #else
     FORCE_INLINE static bool load_to_gears() { return true; }
   #endif
