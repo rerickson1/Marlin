@@ -4444,9 +4444,18 @@
      * move up to the gears. If no filament is detected, the MMU2 can make some more attempts.
      * If all attempts fail, a filament runout will be triggered.
      */
-    //#define MMU_EXTRUDER_SENSOR
+    #define MMU_EXTRUDER_SENSOR
     #if ENABLED(MMU_EXTRUDER_SENSOR)
       #define MMU_LOADING_ATTEMPTS_NR 5 // max. number of attempts to load filament if first load fail
+      /**
+       * (mm) Distance from when the sensor triggers to the extruder gears.
+       * It is important that the bowden length on the MMU2 is calibrated to stop short of
+       * triggering the filament sensor.
+       */
+      #define MMU_SENSOR_TO_GEARS 36.0
+      #ifdef MMU_SENSOR_TO_GEARS
+        #define MMU_SENSOR_TO_GEARS_EXTRA_LENGTH  20 // (mm) extra distance to move the extruder to engage the filament
+      #endif
     #endif
 
   #endif

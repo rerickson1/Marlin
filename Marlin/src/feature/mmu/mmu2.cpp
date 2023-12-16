@@ -632,7 +632,7 @@ inline void beep_bad_cmd() { BUZZ(400, 40); }
           command(MMU_CMD_T0 + index);
           manage_response(true, true);
           mmu_continue_loading();
-          command(MMU_CMD_C0);
+          //command(MMU_CMD_C0);
           mmu_loop();
 
           stepper.enable_extruder();
@@ -653,7 +653,14 @@ inline void beep_bad_cmd() { BUZZ(400, 40); }
     set_runout_valid(true);
   }
 
-  void MMU2::mmu_continue_loading() {
+  bool MMU2::load_to_gears()
+  {
+    mmu_continue_loading();
+    return true;
+  }
+
+  void MMU2::mmu_continue_loading()
+  {
     // Try to load the filament a limited number of times
     bool fil_present = 0;
     for (uint8_t i = 0; i < MMU_LOADING_ATTEMPTS_NR; i++) {
@@ -674,7 +681,11 @@ inline void beep_bad_cmd() { BUZZ(400, 40); }
         // When (T0 rx->ok) load is ready, but in fact it did not load
         // successfully or an overload created pressure in the extruder.
         // Send (C0) to load more and move E_AXIS a little to release pressure.
-        if ((fil_present = FILAMENT_PRESENT())) MMU2_SEND("A");
+        if ((fil_present = FILAMENT_PRESENT()))
+        {
+          DEBUG_ECHOLNPGM("MMU <= 'A'");
+          MMU2_SEND("A");
+        }
       } while (!fil_present && PENDING(millis(), expire_ms));
       stepper.disable_extruder();
       manage_response(true, true);
@@ -685,6 +696,26 @@ inline void beep_bad_cmd() { BUZZ(400, 40); }
       DEBUG_ECHOLNPGM("Filament never reached sensor, runout");
       filament_runout();
     }
+#ifdef MMU_SENSOR_TO_GEARS
+    else
+    {
+      DEBUG_ECHOLNPGM("Filament is at the sensor!");
+
+      // Load the filament into the gears
+      DEBUG_ECHOLNPGM("load filament to gears");
+      command(MMU_CMD_C0);
+      stepper.enable_extruder();
+      DEBUG_ECHOLNPGM("Moving extruder to receive the filament");
+      unscaled_mmu2_e_move(MMU_SENSOR_TO_GEARS + MMU_SENSOR_TO_GEARS_EXTRA_LENGTH, MMU_LOAD_FEEDRATE, true);
+      // current_position.e += MMU_SENSOR_TO_GEARS + MMU_SENSOR_TO_GEARS_EXTRA_LENGTH;
+      // line_to_current_position(MMU_LOAD_FEEDRATE);
+      // planner.synchronize();
+      stepper.disable_extruder();
+      manage_response(true, true);
+      DEBUG_ECHOLNPGM("Filament loaded to gears!");
+    }
+#endif
+
     mmu_idl_sens = 0;
   }
 
@@ -729,18 +760,18 @@ inline void beep_bad_cmd() { BUZZ(400, 40); }
     switch (*special) {
       case '?': {
         DEBUG_ECHOLNPGM("case ?\n");
-        #if ENABLED(MMU2_MENUS)
+#if ENABLED(MMU2_MENUS)
           uint8_t index = mmu2_choose_filament();
           while (!thermalManager.wait_for_hotend(active_extruder, false)) safe_delay(100);
           load_to_nozzle(index);
-        #else
+#else
           beep_bad_cmd();
-        #endif
+#endif
       } break;
 
       case 'x': {
         DEBUG_ECHOLNPGM("case x\n");
-        #if ENABLED(MMU2_MENUS)
+#if ENABLED(MMU2_MENUS)
           planner.synchronize();
           uint8_t index = mmu2_choose_filament();
           stepper.disable_extruder();
@@ -752,9 +783,9 @@ inline void beep_bad_cmd() { BUZZ(400, 40); }
           stepper.enable_extruder();
           extruder = index;
           active_extruder = 0;
-        #else
+#else
           beep_bad_cmd();
-        #endif
+#endif
       } break;
 
       case 'c': {
