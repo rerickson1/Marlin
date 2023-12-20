@@ -706,12 +706,9 @@ inline void beep_bad_cmd() { BUZZ(400, 40); }
       command(MMU_CMD_C0);
       stepper.enable_extruder();
       DEBUG_ECHOLNPGM("Moving extruder to receive the filament");
-      unscaled_mmu2_e_move(MMU_SENSOR_TO_GEARS + MMU_SENSOR_TO_GEARS_EXTRA_LENGTH, MMU_LOAD_FEEDRATE, true);
-      // current_position.e += MMU_SENSOR_TO_GEARS + MMU_SENSOR_TO_GEARS_EXTRA_LENGTH;
-      // line_to_current_position(MMU_LOAD_FEEDRATE);
-      // planner.synchronize();
-      stepper.disable_extruder();
+      unscaled_mmu2_e_move(MMU_SENSOR_TO_GEARS + MMU_SENSOR_TO_GEARS_EXTRA_LENGTH, MMU_LOAD_FEEDRATE, false);
       manage_response(true, true);
+      stepper.disable_extruder();
       DEBUG_ECHOLNPGM("Filament loaded to gears!");
     }
 #endif

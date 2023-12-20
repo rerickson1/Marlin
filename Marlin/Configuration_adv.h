@@ -4393,21 +4393,23 @@
   // This is for Průša MK3-style extruders. Customize for your hardware.
   #define MMU2_FILAMENTCHANGE_EJECT_FEED 80.0
   #define MMU2_LOAD_TO_NOZZLE_SEQUENCE \
-    { 60.0, 1000 }, \
+    { 50.0, 1000 }, \
     { 10.0,  200 }
 
   #define MMU2_RAMMING_SEQUENCE \
-    {   1.0, 1000 }, \
-    {   1.0, 1500 }, \
-    {   2.0, 2000 }, \
-    {   1.5, 3000 }, \
-    {   2.5, 4000 }, \
-    { -15.0, 5000 }, \
-    { -14.0, 1200 }, \
-    {  -6.0,  600 }, \
-    {  10.0,  700 }, \
-    { -10.0,  400 }, \
-    { -50.0, 2000 }
+    { 1.5859, 5341 }, \
+    { 1.5892, 5352 }, \
+    { -15,    12000 }, \
+    { -12.25, 5400 }, \
+    { -3.5,   2700 }, \
+    { -1.75,  1620 }, \
+    { 15,     178 }, \
+    { -15,    855 }, \
+    { 15,     1533 }, \
+    { -15,    2210 }, \
+    { 15,     2887 }, \
+    { -15,    3000 }, \
+    { -52.5,  2000 }
 
   /**
    * Using a sensor like the MMU2S
@@ -4455,7 +4457,7 @@
        */
       #define MMU_SENSOR_TO_GEARS 36.0
       #ifdef MMU_SENSOR_TO_GEARS
-        #define MMU_SENSOR_TO_GEARS_EXTRA_LENGTH  20 // (mm) extra distance to move the extruder to engage the filament
+        #define MMU_SENSOR_TO_GEARS_EXTRA_LENGTH  24 // (mm) extra distance to move the extruder to engage the filament
       #endif
     #endif
 
