@@ -4397,19 +4397,30 @@
     { 10.0,  200 }
 
   #define MMU2_RAMMING_SEQUENCE \
-    { 1.5859, 5341 }, \
-    { 1.5892, 5352 }, \
-    { -15,    12000 }, \
-    { -12.25, 5400 }, \
-    { -3.5,   2700 }, \
-    { -1.75,  1620 }, \
-    { 15,     178 }, \
-    { -15,    855 }, \
-    { 15,     1533 }, \
-    { -15,    2210 }, \
-    { 15,     2887 }, \
-    { -15,    3000 }, \
-    { -52.5,  2000 }
+    { 1.4655, 8165 }, \
+    { 0.9237, 8165 }, \
+    { 0.6522, 8165 }, \
+    { 1.5792, 8182 }, \
+    { 0.4784, 8199 }, \
+    { 1.1041, 8199 }, \
+    { 1.5825, 8199 }, \
+    { -15,    8400 }, \
+    { -17,    5400 }, \
+    { -5.02,  2700 }, \
+    { -2.51,  1620 }, \
+    { 18.3,   190 }, \
+    { -18.3,  1556 }, \
+    { 18.3,   2922 }, \
+    { -18.3,  3000 }, \
+    { 18.3,   3000 }, \
+    { -18.3,  3000 }, \
+    { 18.3,   3000 }, \
+    { -18.3,  3000 }, \
+    { 18.3,   3000 }, \
+    { -18.3,  3000 }, \
+    { 18.3,   3000 }, \
+    { -18.3,  3000 }, \
+    { -59.9,  2000 },
 
   /**
    * Using a sensor like the MMU2S
@@ -4455,7 +4466,7 @@
        * It is important that the bowden length on the MMU2 is calibrated to stop short of
        * triggering the filament sensor.
        */
-      #define MMU_SENSOR_TO_GEARS 36.0
+      #define MMU_SENSOR_TO_GEARS 58.0
       #ifdef MMU_SENSOR_TO_GEARS
         #define MMU_SENSOR_TO_GEARS_EXTRA_LENGTH  24 // (mm) extra distance to move the extruder to engage the filament
       #endif
