@@ -2951,7 +2951,7 @@
   #define PARK_HEAD_ON_PAUSE                    // Park the nozzle during pause and filament change.
   //#define HOME_BEFORE_FILAMENT_CHANGE           // If needed, home before parking for filament change
 
-  //#define FILAMENT_LOAD_UNLOAD_GCODES           // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
+  #define FILAMENT_LOAD_UNLOAD_GCODES           // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
   //#define FILAMENT_UNLOAD_ALL_EXTRUDERS         // Allow M702 to unload all extruders above a minimum target temp (as set by M302)
   #define CONFIGURE_FILAMENT_CHANGE               // Add M603 G-code and menu items. Requires ~1.3K bytes of flash.
 #endif
@@ -4405,11 +4405,11 @@
 #elif HAS_PRUSA_MMU2 || HAS_PRUSA_MMU3
   // Common settings for MMU2/MMU2S/MMU3
   // Serial port used for communication with MMU2/MMU2S/MMU3.
-  #define MMU2_SERIAL_PORT 2
+  #define MMU2_SERIAL_PORT 0
   #define MMU_BAUD 115200
 
   // Use hardware reset for MMU if a pin is defined for it
-  //#define MMU2_RST_PIN 23
+  #define MMU2_RST_PIN P0_26
 
   // Enable if the MMU2 has 12V stepper motors (MMU2 Firmware 1.0.2 and up)
   // (MMU2/MMU2S only)
@@ -4458,8 +4458,8 @@
   // ----
   // These values are compatible with MMU3 as they are defined in mm/s
 
-  #define MMU2_EXTRUDER_PTFE_LENGTH 42.3f // mm
-  #define MMU2_EXTRUDER_HEATBREAK_LENGTH  17.7f // mm
+  #define MMU2_EXTRUDER_PTFE_LENGTH 51.9f // mm
+  #define MMU2_EXTRUDER_HEATBREAK_LENGTH  21.5f // mm
 
   #define MMU2_LOAD_TO_NOZZLE_SEQUENCE \
       { MMU2_EXTRUDER_PTFE_LENGTH,       810.0F / 60.F}, \
@@ -4500,14 +4500,14 @@
    * the filament has been loaded properly by moving the filament back and
    * forth to see if the filament runout sensor is going to get triggered
    * again, which should not occur if the filament is properly loaded.
-   * 
+   *
    * Thus, the MMU2_CAN_LOAD_SEQUENCE should contain some forward and
    * backward moves. The forward moves should be greater than the backward
    * moves.
-   * 
+   *
    * This is useless if your filament runout sensor is way behind the gears.
    * In that case use {0, MMU2_CAN_LOAD_FEEDRATE}
-   * 
+   *
    * Adjust MMU2_CAN_LOAD_SEQUENCE according to your setup.
   */
     #define MMU2_CAN_LOAD_FEEDRATE 800    // (mm/min)
@@ -4528,14 +4528,15 @@
   #elif HAS_PRUSA_MMU3
     // MMU3 Specific settings
 
-    #define MAX_RETRIES 3 // TODO: This has the same purpose of MMU2_C0_RETRY
+    // TODO: This has the same purpose of MMU2_C0_RETRY
+    #define MAX_RETRIES 3
 
     // Nominal distance from the extruder gear to the nozzle tip is 87mm
     // However, some slipping may occur and we need separate distances for
     // LoadToNozzle and ToolChange.
     // - +5mm seemed good for LoadToNozzle,
     // - but too much (made blobs) for a ToolChange
-    #define MMU2_LOAD_TO_NOZZLE_LENGTH 87.0F + 5.0F
+    #define MMU2_LOAD_TO_NOZZLE_LENGTH 93.0F + 5.0F
 
     // As discussed with our PrusaSlicer profile specialist
     // - ToolChange shall not try to push filament into the very tip of the nozzle
@@ -4544,8 +4545,8 @@
     // Beware - this value is used to initialize the MMU logic layer - it will be sent to the MMU upon line up (written into its 8bit register 0x0b)
     // However - in the G-code we can get a request to set the extra load distance at runtime to something else (M708 A0xb Xsomething).
     // The printer intercepts such a call and sets its extra load distance to match the new value as well.
-    #define MMU2_FILAMENT_SENSOR_POSITION 0 // mm
-    #define MMU2_LOAD_DISTANCE_PAST_GEARS 5 // mm
+    #define MMU2_FILAMENT_SENSOR_POSITION 58 // mm
+    #define MMU2_LOAD_DISTANCE_PAST_GEARS 10 // mm
     #define MMU2_TOOL_CHANGE_LOAD_LENGTH MMU2_FILAMENT_SENSOR_POSITION + MMU2_LOAD_DISTANCE_PAST_GEARS // mm
 
     #define MMU2_LOAD_TO_NOZZLE_FEED_RATE 20.0F // mm/s
@@ -4569,12 +4570,12 @@
 
     /**
      * SpoolJoin Consumes All Filament -- EXPERIMENTAL
-     * 
+     *
      * SpoolJoin normally triggers when FINDA sensor untriggers while printing.
      * This is the default behaviour and it doesn't consume all the filament
      * before triggering a filament change. This leaves some filament in the
      * current slot and before switching to the next slot it is unloaded.
-     * 
+     *
      * Enabling this option will trigger the filament change when both FINDA
      * and Filament Runout Sensor triggers during the print and it allows the
      * filament in the current slot to be completely consumed before doing the
