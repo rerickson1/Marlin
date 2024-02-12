@@ -329,6 +329,38 @@
     #define LCD_PINS_EN              EXP1_08_PIN
     #define LCD_PINS_D4              EXP1_06_PIN
 
+  #elif ENABLED(ANET_FULL_GRAPHICS_LCD)
+    #ifndef NO_CONTROLLER_CUSTOM_WIRING_WARNING
+      #error "CAUTION! ANET_FULL_GRAPHICS_LCD requires wiring modifications. See 'pins_MKS_SGEN_L_V2.h' for details. (Define NO_CONTROLLER_CUSTOM_WIRING_WARNING to suppress this error.)"
+    #endif
+
+    /**
+     * 1. Cut the tab off the LCD connector so it can be plugged into the "EXP1" connector the other way.
+     * 2. Swap the LCD's +5V (Pin2) and GND (Pin1) wires. (This is the critical part!)
+     *
+     * !!! If you are unsure, ask for help! Your motherboard may be damaged in some circumstances !!!
+     *
+     * The ANET_FULL_GRAPHICS_LCD connector plug:
+     *
+     *                BEFORE                     AFTER
+     *                ------                     ------
+     *      (BEEPER) | 1  2 | (CLK)    (BEEPER) |10  9 | (CLK)
+     *     (BTN_ENC) | 3  4 | --      (BTN_ENC) | 8  7 | --
+     *     (BTN_EN1)   5  6 | (SID)   (BTN_EN1)   6  5 | (SID)
+     *     (BTN_EN2) | 7  8 | (CS)    (BTN_EN2) | 4  3 | (CS)
+     *            5V | 9 10 | GND           GND | 2  1 | 5V
+     *                ------                     ------
+     *                 LCD                        LCD
+     */
+
+    #define BTN_EN1                 EXP1_05_PIN
+    #define BTN_EN2                 EXP1_07_PIN
+    #undef BTN_ENC
+    #define BTN_ENC                 EXP1_03_PIN
+    #define LCD_PINS_D4             EXP1_02_PIN // CLK
+    #define LCD_PINS_EN             EXP1_06_PIN // SID
+    #define LCD_PINS_RS             EXP1_08_PIN // CS
+
   #else
 
     #define BTN_EN1                  EXP2_03_PIN
@@ -463,4 +495,4 @@
 //
 //#define PIN_P0_02                        P0_02  // AUX1 (Interrupt Capable/ADC/Serial Port 0)
 //#define PIN_P0_03                        P0_03  // AUX1 (Interrupt Capable/ADC/Serial Port 0)
-//#define PS_ON_PIN                        P1_23  // SERVO0 P1.23
+#define PS_ON_PIN                        P2_00  // SERVO P2.0
