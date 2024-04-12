@@ -227,7 +227,7 @@
 
 // This defines the number of extruders
 // :[0, 1, 2, 3, 4, 5, 6, 7, 8]
-#define EXTRUDERS 1
+#define EXTRUDERS 5
 
 // Drive the E axis with two synchronized steppers
 //#define E_DUAL_STEPPER_DRIVERS
@@ -422,7 +422,7 @@
  * See additional options in Configuration_adv.h.
  * :["PRUSA_MMU1", "PRUSA_MMU2", "PRUSA_MMU2S", "PRUSA_MMU3", "EXTENDABLE_EMU_MMU2", "EXTENDABLE_EMU_MMU2S"]
  */
-//#define MMU_MODEL PRUSA_MMU3
+#define MMU_MODEL PRUSA_MMU3
 
 // @section psu control
 
