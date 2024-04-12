@@ -2959,7 +2959,7 @@
   #define PARK_HEAD_ON_PAUSE                    // Park the nozzle during pause and filament change.
   //#define HOME_BEFORE_FILAMENT_CHANGE           // If needed, home before parking for filament change
 
-  //#define FILAMENT_LOAD_UNLOAD_GCODES           // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
+  #define FILAMENT_LOAD_UNLOAD_GCODES           // Add M701/M702 Load/Unload G-codes, plus Load/Unload in the LCD Prepare menu.
   //#define FILAMENT_UNLOAD_ALL_EXTRUDERS         // Allow M702 to unload all extruders above a minimum target temp (as set by M302)
   #define CONFIGURE_FILAMENT_CHANGE               // Add M603 G-code and menu items. Requires ~1.3K bytes of flash.
 #endif
@@ -4436,12 +4436,12 @@
 #elif HAS_PRUSA_MMU2 || HAS_PRUSA_MMU3
   // Common settings for MMU2/MMU2S/MMU3
   // Serial port used for communication with MMU2/MMU2S/MMU3.
-  #define MMU_SERIAL_PORT 2
+  #define MMU_SERIAL_PORT 0
   #define MMU_BAUD 115200
 
-  //#define MMU_RST_PIN 23    // Define this pin to use Hardware Reset for MMU2/MMU2S/MMU3
+  #define MMU_RST_PIN P0_26    // Define this pin to use Hardware Reset for MMU2/MMU2S/MMU3
 
-  //#define MMU_MENUS         // Add an LCD menu for MMU2/MMU2S/MMU3
+  #define MMU_MENUS         // Add an LCD menu for MMU2/MMU2S/MMU3
 
   //#define MMU_DEBUG         // Write debug info to serial output
 
@@ -4533,14 +4533,14 @@
     // Beware - this value is used to initialize the MMU logic layer - it will be sent to the MMU upon line up (written into its 8bit register 0x0b)
     // However - in the G-code we can get a request to set the extra load distance at runtime to something else (M708 A0xb Xsomething).
     // The printer intercepts such a call and sets its extra load distance to match the new value as well.
-    #define MMU3_FILAMENT_SENSOR_E_POSITION  0   // (mm)
-    #define _MMU3_LOAD_DISTANCE_PAST_GEARS   5   // (mm)
+    #define MMU3_FILAMENT_SENSOR_E_POSITION  58   // (mm)
+    #define _MMU3_LOAD_DISTANCE_PAST_GEARS   10   // (mm)
     #define MMU3_TOOL_CHANGE_LOAD_LENGTH (MMU3_FILAMENT_SENSOR_E_POSITION + _MMU3_LOAD_DISTANCE_PAST_GEARS) // (mm)
 
     #define MMU3_LOAD_TO_NOZZLE_FEED_RATE        20.0 // (mm/s)
 
     #define MMU3_VERIFY_LOAD_TO_NOZZLE_FEED_RATE 50.0 // (mm/s)
-    #define _MMU3_VERIFY_LOAD_TO_NOZZLE_TWEAK    -5.0 // (mm) Amount to adjust the length for verifying load-to-nozzle
+    #define _MMU3_VERIFY_LOAD_TO_NOZZLE_TWEAK    -(MMU3_TOOL_CHANGE_LOAD_LENGTH) // (mm) Amount to adjust the length for verifying load-to-nozzle
 
     // The first thing the MMU does is initialize its axis.
     // Meanwhile the E-motor will unload 20mm of filament in about 1 second.
@@ -4550,8 +4550,8 @@
     // After loading a new filament, the printer will extrude this length of filament
     // then retract to the original position. This is used to check if the filament sensor
     // reading flickers or filament is jammed.
-    #define _MMU_EXTRUDER_PTFE_LENGTH            42.3 // (mm)
-    #define _MMU_EXTRUDER_HEATBREAK_LENGTH       17.7 // (mm)
+    #define _MMU_EXTRUDER_PTFE_LENGTH            30.0 // (mm)
+    #define _MMU_EXTRUDER_HEATBREAK_LENGTH       21.5 // (mm)
     #define MMU3_CHECK_FILAMENT_PRESENCE_EXTRUSION_LENGTH (MMU3_FILAMENT_SENSOR_E_POSITION + _MMU_EXTRUDER_PTFE_LENGTH + _MMU_EXTRUDER_HEATBREAK_LENGTH + _MMU3_VERIFY_LOAD_TO_NOZZLE_TWEAK) // (mm)
 
     /**
