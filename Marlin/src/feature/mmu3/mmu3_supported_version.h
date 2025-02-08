@@ -29,4 +29,4 @@
 
 #define mmuVersionMajor 3
 #define mmuVersionMinor 0
-#define mmuVersionPatch 2
+#define mmuVersionPatch 3
