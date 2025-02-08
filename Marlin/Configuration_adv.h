@@ -4535,7 +4535,7 @@
     // Beware - this value is used to initialize the MMU logic layer - it will be sent to the MMU upon line up (written into its 8bit register 0x0b)
     // However - in the G-code we can get a request to set the extra load distance at runtime to something else (M708 A0xb Xsomething).
     // The printer intercepts such a call and sets its extra load distance to match the new value as well.
-    #define MMU3_FILAMENT_SENSOR_E_POSITION  58   // (mm)
+    #define MMU3_FILAMENT_SENSOR_E_POSITION  60   // (mm)
     #define _MMU3_LOAD_DISTANCE_PAST_GEARS   10   // (mm)
     #define MMU3_TOOL_CHANGE_LOAD_LENGTH (MMU3_FILAMENT_SENSOR_E_POSITION + _MMU3_LOAD_DISTANCE_PAST_GEARS) // (mm)
 
