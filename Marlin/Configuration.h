@@ -736,13 +736,13 @@
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify up to one value per hotend here, according to your setup.
     // If there are fewer values, the last one applies to the remaining hotends.
-    #define DEFAULT_Kp_LIST {  49.19,  49.19 }
-    #define DEFAULT_Ki_LIST {   6.33,   6.33 }
-    #define DEFAULT_Kd_LIST {  95.60,  95.60 }
+    #define DEFAULT_KP_LIST {  49.19,  49.19 }
+    #define DEFAULT_KI_LIST {   6.33,   6.33 }
+    #define DEFAULT_KD_LIST {  95.60,  95.60 }
   #else
-    #define DEFAULT_Kp 19.38
-    #define DEFAULT_Ki 3.45
-    #define DEFAULT_Kd 27.23
+    #define DEFAULT_KP 19.38
+    #define DEFAULT_KI 3.45
+    #define DEFAULT_KD 27.23
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -840,9 +840,9 @@
 
   // ANET A8
   // original Bed + 0.3mm Heat conducting into 4mm borosilicate (PID-Autotune: M303 E-1 S60 C5):
-  #define DEFAULT_bedKp 22.20
-  #define DEFAULT_bedKi 1.08
-  #define DEFAULT_bedKd 114.00
+  #define DEFAULT_BED_KP 22.20
+  #define DEFAULT_BED_KI 1.08
+  #define DEFAULT_BED_KD 114.00
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
   //#define BED_LIMIT_SWITCHING   // Keep the bed temperature within BED_LIMIT_HYSTERESIS of the target
