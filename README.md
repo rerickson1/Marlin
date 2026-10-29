@@ -92,6 +92,26 @@ To build and upload Marlin you will use one of these tools:
 - You can also use VSCode with devcontainer : See [Installing Marlin (VSCode devcontainer)](https://marlinfw.org/docs/basics/install_devcontainer_vscode.html).
 - You can still build Marlin with [Arduino IDE](//www.arduino.cc/en/main/software) : See [Building Marlin with Arduino](//marlinfw.org/docs/basics/install_arduino.html). We hope to improve the Arduino build experience, but at this time, PlatformIO is the preferred choice.
 
+### A8+ Custom
+
+This branch ports the 11 printer commits from `rde/2.1.x_mmu3-6` (through
+`2ee4c56b9e`) onto `bugfix-2.1.x` at `dff537b7ba`. It retains the MKS SGEN L V2,
+TMC2209 drivers, Revo Six tuning, BLTouch/UBL, ANET display wiring, and MMU3
+firmware 3.0.3 settings. PID constant names are updated for current Marlin.
+
+Build from the repository root with PlatformIO:
+
+```sh
+platformio run -e LPC1769
+```
+
+The output is `.pio/build/LPC1769/firmware.bin`. `LPC1769` is also the default
+environment. The original debug options, including `MARLIN_DEV_MODE`, remain
+enabled; review these before production use. The custom display wiring is
+documented in [the board pins file](Marlin/src/pins/lpc1769/pins_MKS_SGEN_L_V2.h).
+As in the source branch, `FILAMENT_RUNOUT_DISTANCE_MM` remains commented out,
+so the nested BTT SFS motion-sensor settings are inactive.
+
 ## 32-bit ARM boards
 
 Marlin is compatible with a plethora of 32-bit ARM boards, which offer ample computational power and memory and allows Marlin to deliver state-of-the-art performance and features we like to see in modern 3d printers. Some of the newer features in Marlin will require use of a 32-bit ARM board.
