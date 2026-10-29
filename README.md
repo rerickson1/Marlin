@@ -106,8 +106,9 @@ platformio run -e LPC1769
 ```
 
 The output is `.pio/build/LPC1769/firmware.bin`. `LPC1769` is also the default
-environment. The original debug options, including `MARLIN_DEV_MODE`, remain
-enabled; review these before production use. The custom display wiring is
+environment. Development mode, buffer monitoring, the memory watcher, and detailed
+leveling debugging are disabled. `TMC_DEBUG` remains enabled for `M122` diagnostics,
+along with driver monitoring and fault protection. The custom display wiring is
 documented in [the board pins file](Marlin/src/pins/lpc1769/pins_MKS_SGEN_L_V2.h).
 As in the source branch, `FILAMENT_RUNOUT_DISTANCE_MM` remains commented out,
 so the nested BTT SFS motion-sensor settings are inactive.
