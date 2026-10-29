@@ -95,7 +95,7 @@ To build and upload Marlin you will use one of these tools:
 ### A8+ Custom
 
 This branch ports the 11 printer commits from `rde/2.1.x_mmu3-6` (through
-`2ee4c56b9e`) onto `bugfix-2.1.x` at `dff537b7ba`. It retains the MKS SGEN L V2,
+`2ee4c56b9e`) onto `bugfix-2.1.x`. It retains the MKS SGEN L V2,
 TMC2209 drivers, Revo Six tuning, BLTouch/UBL, ANET display wiring, and MMU3
 firmware 3.0.3 settings. PID constant names are updated for current Marlin.
 
