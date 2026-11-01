@@ -4874,7 +4874,7 @@
     // then retract to the original position. This is used to check if the filament sensor
     // reading flickers or filament is jammed.
     #define _MMU_EXTRUDER_PTFE_LENGTH            30.0 // (mm)
-    #define _MMU_EXTRUDER_HEATBREAK_LENGTH       21.5 // (mm)
+    #define _MMU_EXTRUDER_HEATBREAK_LENGTH       18.0 // (mm)
     #define MMU3_CHECK_FILAMENT_PRESENCE_EXTRUSION_LENGTH (MMU3_FILAMENT_SENSOR_E_POSITION + _MMU_EXTRUDER_PTFE_LENGTH + _MMU_EXTRUDER_HEATBREAK_LENGTH + _MMU3_VERIFY_LOAD_TO_NOZZLE_TWEAK) // (mm)
 
     /**
