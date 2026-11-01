@@ -113,6 +113,11 @@ documented in [the board pins file](Marlin/src/pins/lpc1769/pins_MKS_SGEN_L_V2.h
 As in the source branch, `FILAMENT_RUNOUT_DISTANCE_MM` remains commented out,
 so the nested BTT SFS motion-sensor settings are inactive.
 
+MMU3 E-only moves apply UBL correction before entering the planner so sensor-triggered
+loading does not introduce a Z move and alter the extrusion speed. After flashing,
+verify loading with leveling enabled (`M420 S1`) as well as disabled (`M420 S0`),
+then check a printed tool change. Keep the nozzle hot and clear of the bed.
+
 ## 32-bit ARM boards
 
 Marlin is compatible with a plethora of 32-bit ARM boards, which offer ample computational power and memory and allows Marlin to deliver state-of-the-art performance and features we like to see in modern 3d printers. Some of the newer features in Marlin will require use of a 32-bit ARM board.
