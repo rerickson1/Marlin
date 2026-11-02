@@ -4837,7 +4837,7 @@
     #define MMU3_LOAD_TO_NOZZLE_FEED_RATE        20.0 // (mm/s)
 
     #define MMU3_VERIFY_LOAD_TO_NOZZLE_FEED_RATE 50.0 // (mm/s)
-    #define _MMU3_VERIFY_LOAD_TO_NOZZLE_TWEAK    -(MMU3_TOOL_CHANGE_LOAD_LENGTH) // (mm) Amount to adjust the length for verifying load-to-nozzle
+    #define _MMU3_VERIFY_LOAD_TO_NOZZLE_TWEAK    -5.0 // (mm) Amount to adjust the length for verifying load-to-nozzle
 
     // The first thing the MMU does is initialize its axis.
     // Meanwhile the E-motor will unload 20mm of filament in about 1 second.

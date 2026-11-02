@@ -342,6 +342,10 @@ namespace MMU3 {
   }
 
   bool MMU3::verifyFilamentEnteredPTFE() {
+    // A negative length would retract first and can pull the filament out of the extruder gears
+    static_assert((MMU3_CHECK_FILAMENT_PRESENCE_EXTRUSION_LENGTH) - (MMU3_TOOL_CHANGE_LOAD_LENGTH) > 0,
+      "MMU3_CHECK_FILAMENT_PRESENCE_EXTRUSION_LENGTH must exceed MMU3_TOOL_CHANGE_LOAD_LENGTH.");
+
     planner_synchronize();
 
     if (WhereIsFilament() != FilamentState::AT_FSENSOR)
